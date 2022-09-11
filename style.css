@@ -13,6 +13,7 @@ html{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100vw;
+    font-family: 'Oswald', sans-serif;
 }
 
 /* BASICS */
@@ -41,7 +42,7 @@ main{
 header{
     display: flex;
     justify-content: space-around;
-    
+    margin: 10px;
 }
 
 header p{
@@ -50,6 +51,13 @@ header p{
 
 .content{
     height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.nameWithLogo{
+    display: flex;
+    justify-content: space-between;
 }
 
 .search{
@@ -58,6 +66,36 @@ header p{
     height: 30px;
 }
 
-.search i{
+/* MAIN CONTAINER */
 
+main{
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
 }
+
+.row__item{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 11%;
+    justify-content: center;
+    align-items: stretch;
+   
+}
+
+.row__item img{
+    max-width: 80px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.row__item p{
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+
