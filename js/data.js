@@ -42,9 +42,6 @@ const findPerson = async (name) => {
   }
 };
 
-const actualPerson = await findPerson('hodor');
-console.log(actualPerson);
-
 export {
   sortArr,
   findPerson,

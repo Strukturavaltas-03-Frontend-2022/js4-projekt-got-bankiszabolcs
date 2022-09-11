@@ -78,9 +78,17 @@ const modifySidebar = (image, name, logo, text) => {
 const loadSideBar = async (person) => {
   const actualPerson = await findPerson(person);
   console.log(actualPerson);
-  const logoOfPerson = `./assets/houses/${actualPerson.house ? actualPerson.house : 'nothing'}.png`;
-  modifySidebar(actualPerson.picture, actualPerson.name, logoOfPerson, actualPerson.bio);
+/*   const actualHouse = actualPerson.house ? actualPerson : 'nothing';
+  const logoOfPerson = `./assets/houses/${actualHouse}.png`;
+  modifySidebar(actualPerson.picture, actualPerson.name, logoOfPerson, actualPerson.bio); */
 };
 
+mainContainer.addEventListener('click', (e) => {
+  const clickedElement = e.target.closest('.row__item');
+  const personName = clickedElement.querySelector('p').innerHTML;
+});
 
-loadSideBar('viserys targaryen');
+loadSideBar('Bronn'); // undefined jön állandóan
+
+const actualPerson = await findPerson('hodor');
+console.log(actualPerson); // itt bezzeg jó
