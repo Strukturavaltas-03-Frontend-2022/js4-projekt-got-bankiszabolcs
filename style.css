@@ -1,0 +1,63 @@
+@import url('http://db.onlinewebfonts.com/c/97c4b25dc74e0ab045154e75a8fdd69d?family=Game+of+Thrones');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-image: url('./assets/site/mapblue.jpg');
+    background-color: aqua;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100vw;
+}
+
+/* BASICS */
+
+.wrapper{
+    display: flex;
+}
+
+main{
+    width: 80%;
+    height: 100vh;
+}
+
+.sidebar{
+    width: 20%;
+    background-color: rgb(74, 74, 74);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    color: white;
+}
+
+/* SIDEBAR */
+
+header{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+header p{
+    font-family: "Game of Thrones"
+}
+
+.content{
+    height: 90vh;
+}
+
+.search{
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
+}
+
+.search i{
+
+}
