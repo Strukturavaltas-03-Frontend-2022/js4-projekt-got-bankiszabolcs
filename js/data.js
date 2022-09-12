@@ -1,16 +1,10 @@
-const getData = async () => {
-  try {
-    const result = await fetch('./json/got.json').then((data) => data.json());
-    return result;
-  } catch (error) {
-    console.error(`Valami hiba van a adatok lekérésekor: ${error}`);
-    return '';
-  }
-};
 
-const filterData = async () => {
+
+// EZ MÁIG NEM ÉRTEM MIÉRT NEM MŰKÖDÖTT
+/* const filterData = () => {
   try {
-    const arr = await getData().then((data) => data);
+    const arr = getData().then((data) => data).then((data) => data);
+    console.log(arr);
     const filteredArr = arr.filter((item) => item.dead !== true).slice(0, -1);
     return filteredArr;
   } catch (error) {
@@ -19,9 +13,9 @@ const filterData = async () => {
   }
 };
 
-const sortArr = async () => {
+const sortArr = () => {
   try {
-    const arr = await filterData().then((data) => data);
+    const arr = filterData().then((data) => data);
     const sortedArr = arr.sort((a, b) => a.name.split(' ').slice(-1)[0].localeCompare(b.name.split(' ').slice(-1)[0], 'hu'));
 
     return sortedArr;
@@ -30,19 +24,15 @@ const sortArr = async () => {
     return '';
   }
 };
-
-const findPerson = async (name) => {
+ */
+/* const findPerson = (name) => {
   try {
-    const result = await sortArr();
+    const result = sortArr();
     const person = result.find((item) => item.name.toLowerCase() === name);
     return person;
   } catch (error) {
     console.error('Nem találtunk a keresésnek megfelelő személyt!');
     return '';
   }
-};
+}; */
 
-export {
-  sortArr,
-  findPerson,
-};

@@ -1,9 +1,22 @@
-import { findPerson, sortArr } from './data.js';
-
 const mainContainer = document.querySelector('main');
 const sidebarContainer = document.querySelector('.content');
+const input = document.querySelector('.input');
+const menu = document.querySelector('.fa-bars');
+const sidebar = document.querySelector('.sidebar');
 
-const result = await sortArr().then((data) => data);
+const getData = async () => {
+  try {
+    const request = await fetch('./json/got.json');
+    const result = await request.json();
+    return result.filter((item) => item.dead !== true).slice(0, -1)
+      .sort((a, b) => a.name.split(' ').slice(-1)[0].localeCompare(b.name.split(' ').slice(-1)[0], 'hu'));
+  } catch (error) {
+    console.error(`Valami hiba van a adatok lekérésekor: ${error}`);
+    return '';
+  }
+};
+
+const result = await getData();
 
 const createItem = function (container, image, alt, text) {
   const actualImg = container.querySelector('img');
@@ -39,9 +52,8 @@ const loadData = () => {
   });
 };
 
-loadData();
-
 const madeSideBarContent = () => {
+  sidebarContainer.innerHTML = '';
   const image = document.createElement('img');
   image.classList.add('sidebarPicture');
   sidebarContainer.appendChild(image);
@@ -59,8 +71,6 @@ const madeSideBarContent = () => {
   return [image, personName, logo, text];
 };
 
-madeSideBarContent();
-
 const modifySidebar = (image, name, logo, text) => {
   const [imageBig, personName, houselogo, details] = madeSideBarContent();
 
@@ -68,27 +78,68 @@ const modifySidebar = (image, name, logo, text) => {
   personName.textContent = name;
   houselogo.src = logo;
   details.textContent = text;
-
-  /* const actualImg = sidebarContainer.querySelector('.sidebarPicture');
-  const actualName = sidebarContainer.querySelector('h1')
-  const actualLogo = sidebarContainer.querySelector('.logo')
-  const actualText = sidebarContainer.querySelector() */
 };
 
-const loadSideBar = async (person) => {
-  const actualPerson = await findPerson(person);
-  console.log(actualPerson);
-/*   const actualHouse = actualPerson.house ? actualPerson : 'nothing';
-  const logoOfPerson = `./assets/houses/${actualHouse}.png`;
-  modifySidebar(actualPerson.picture, actualPerson.name, logoOfPerson, actualPerson.bio); */
+const loadSideBar = (searchEl) => {
+  try {
+    const actualPsn = result.find((person) => person.name.toLowerCase() === searchEl.toLowerCase());
+    const actualHouse = actualPsn.house ? actualPsn.house : 'nothing';
+    const logoOfPerson = `./assets/houses/${actualHouse}.png`;
+    const pictureofPsn = actualPsn.picture ? actualPsn.picture : './assets/pictures/placeholder.png';
+    modifySidebar(pictureofPsn, actualPsn.name, logoOfPerson, actualPsn.bio);
+    
+  } catch (error) {
+    madeSideBarContent();
+    document.querySelector('.nameWithLogo h1').textContent = 'Character not found';
+  }
+};
+
+const deleteActive = () => {
+  const allItemImg = Array.from(document.querySelectorAll('.row__item img'));
+  allItemImg.forEach((item) => {
+    item.classList.remove('active');
+  });
+  const allItemP = Array.from(document.querySelectorAll('.row__item p'));
+  allItemP.forEach((item) => {
+    item.classList.remove('active');
+  });
 };
 
 mainContainer.addEventListener('click', (e) => {
+  deleteActive();
   const clickedElement = e.target.closest('.row__item');
+  Array.from(clickedElement.childNodes).forEach((item) => item.classList.add('active'));
   const personName = clickedElement.querySelector('p').innerHTML;
+  sidebarContainer.innerHTML = '';
+  madeSideBarContent();
+  loadSideBar(personName);
 });
 
-loadSideBar('Bronn'); // undefined jön állandóan
+let lastTimeout = 0;
+input.addEventListener('keyup', () => {
+  clearTimeout(lastTimeout);
+  lastTimeout = setTimeout(() => {
+    clearTimeout(lastTimeout);
+    loadSideBar(input.value);
+  }, 2000, input.value);
+});
 
-const actualPerson = await findPerson('hodor');
-console.log(actualPerson); // itt bezzeg jó
+input.addEventListener('keyup', (e) => {
+  e.preventDefault();
+  e.key === 'Enter' ? loadSideBar(input.value) : '';
+});
+
+/* menu.addEventListener('click', () => {
+  menu.classList.toggle('activeMenu');
+  sidebar.classList.toggle('activeSidebar');
+  const timeout = setTimeout(() => {
+    sidebar.classList.toggle('activeSidebar2');
+  }, 500);
+  clearTimeout(timeout);
+  menu.classList.toggle('activeMenu2');
+}); */
+
+(function () {
+  loadData();
+  madeSideBarContent();
+}());

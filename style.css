@@ -20,21 +20,32 @@ html{
 
 .wrapper{
     display: flex;
+    align-items: stretch;
+    height: 100%;
 }
 
 main{
     width: 80%;
-    height: 100vh;
+    height: 100%;
 }
 
 .sidebar{
     width: 20%;
     background-color: rgb(74, 74, 74);
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     color: white;
+    align-items: stretch;
+}
+
+.activeSidebar{
+    transition: all 1s;
+    transform: translateX(500px);
+}
+.activeSidebar2{
+    display: none;
 }
 
 /* SIDEBAR */
@@ -42,28 +53,57 @@ main{
 header{
     display: flex;
     justify-content: space-around;
-    margin: 10px;
+    margin: 10px 0;
+    gap: 10px;
 }
 
 header p{
     font-family: "Game of Thrones"
 }
 
+.fa-bars{
+    cursor: pointer;
+}
+
+.activeMenu{
+    position: sticky;
+    border: 10px solid rgb(74, 74, 74);
+    background-color:rgb(74, 74, 74); ;
+    border-radius: 100%;
+    transform: translateX(-240px);
+}
+
+.activeMenu2{
+    display: block;
+}
+
 .content{
     height: 90vh;
     display: flex;
     flex-direction: column;
+   
 }
 
 .nameWithLogo{
     display: flex;
     justify-content: space-between;
+    margin: 10px 0;
+}
+
+.content p{
+    margin: 10px 0;
+    font-weight: lighter;
 }
 
 .search{
     display: flex;
     justify-content: space-around;
     height: 30px;
+}
+
+input{
+    padding: 3px;
+    width: 80%;
 }
 
 /* MAIN CONTAINER */
@@ -90,12 +130,69 @@ main{
     max-width: 80px;
     margin: 0 auto;
     cursor: pointer;
+    transition: opacity .5s;
+}
+
+.row__item img:hover, .row__item p:hover{
+    opacity: .7;
+}
+
+.row__item img:active, .row__item p:active{
+    opacity: .4;
+}
+
+.active{
+    opacity: .7;
 }
 
 .row__item p{
     margin: 0 auto;
     text-align: center;
     cursor: pointer;
+    transition: opacity .5s;
+}
+
+/* MEDIA QUERIES*/
+@media screen and (max-width: 1100px) {
+    .row__item{
+        width: 15%;
+    }
+    main{
+        width: 70%;
+    }
+    
+    .sidebar{
+        width: 30%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+    .row__item{
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .row__item{
+        width: 25%;
+    }
+    .nameWithLogo{
+        flex-direction: column;
+        max-width: 30px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sidebar{
+        width: 60%;
+    }
+    main{
+        width: 50%;
+    }
+    .row__item{
+        width: 80%;
+    }
+
 }
 
 
