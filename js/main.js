@@ -1,8 +1,6 @@
 const mainContainer = document.querySelector('main');
 const sidebarContainer = document.querySelector('.content');
 const input = document.querySelector('.input');
-const menu = document.querySelector('.fa-bars');
-const sidebar = document.querySelector('.sidebar');
 
 const getData = async () => {
   try {
@@ -11,14 +9,16 @@ const getData = async () => {
     return result.filter((item) => item.dead !== true).slice(0, -1)
       .sort((a, b) => a.name.split(' ').slice(-1)[0].localeCompare(b.name.split(' ').slice(-1)[0], 'hu'));
   } catch (error) {
-    console.error(`Valami hiba van a adatok lekérésekor: ${error}`);
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Hiba történt az adatok lekérésekor😱';
+    mainContainer.appendChild(errorMessage);
     return '';
   }
 };
 
 const result = await getData();
 
-const createItem = function (container, image, alt, text) {
+const createItem = (container, image, alt, text) => {
   const actualImg = container.querySelector('img');
   const actualText = container.querySelector('p');
   actualImg.src = image;
@@ -26,7 +26,7 @@ const createItem = function (container, image, alt, text) {
   actualText.textContent = text;
 };
 
-const createOneItem = function () {
+const createOneItem = () => {
   const item = document.createElement('div');
   item.classList.add('row__item');
   const img = document.createElement('img');
@@ -37,7 +37,7 @@ const createOneItem = function () {
   mainContainer.appendChild(item);
 };
 
-const createAllItems = function () {
+const createAllItems = () => {
   for (let i = 0; i < result.length; i += 1) {
     createOneItem();
   }
@@ -112,6 +112,7 @@ mainContainer.addEventListener('click', (e) => {
   sidebarContainer.innerHTML = '';
   madeSideBarContent();
   loadSideBar(personName);
+  input.value = '';
 });
 
 let lastTimeout = 0;
@@ -125,10 +126,10 @@ input.addEventListener('keyup', () => {
 
 input.addEventListener('keyup', (e) => {
   e.preventDefault();
-  e.key === 'Enter' ? loadSideBar(input.value) : '';
+  if (e.key === 'Enter')loadSideBar(input.value);
 });
 
-(function () {
+(() => {
   loadData();
   madeSideBarContent();
-}());
+})();
