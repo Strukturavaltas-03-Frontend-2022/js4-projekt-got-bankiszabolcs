@@ -12,7 +12,7 @@ html{
     background-color: aqua;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 100vw;
+   /* background-size: 100vw;˛*/
     font-family: 'Oswald', sans-serif;
 }
 
@@ -27,12 +27,13 @@ html{
 main{
     width: 80%;
     height: 100%;
+
 }
 
 .sidebar{
     width: 20%;
     background-color: rgb(74, 74, 74);
-    height: 100%;
+
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -43,9 +44,6 @@ main{
 .activeSidebar{
     transition: all 1s;
     transform: translateX(500px);
-}
-.activeSidebar2{
-    display: none;
 }
 
 /* SIDEBAR */
@@ -73,15 +71,15 @@ header p{
     transform: translateX(-240px);
 }
 
-.activeMenu2{
-    display: block;
-}
-
 .content{
     height: 90vh;
     display: flex;
     flex-direction: column;
    
+}
+
+.sidebarPicture{
+    border-radius: 8px;
 }
 
 .nameWithLogo{
@@ -103,7 +101,35 @@ header p{
 
 input{
     padding: 3px;
-    width: 80%;
+    border: 0;
+    height: 30px;
+    border-top-right-radius: 4%;
+    border-bottom-right-radius: 4%;
+}
+
+input:focus-visible {
+    outline: none
+}
+.fa-chevron-right{
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    color: white;
+}
+
+.inputContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-magnifying-glass{
+    background-color: white;
+    color: gray;
+    margin: 0;
+    padding: 5px;
+    height: 30px;
 }
 
 /* MAIN CONTAINER */
@@ -123,7 +149,6 @@ main{
     width: 11%;
     justify-content: center;
     align-items: stretch;
-   
 }
 
 .row__item img{
@@ -179,6 +204,7 @@ main{
     .nameWithLogo{
         flex-direction: column;
         max-width: 30px;
+        gap: 10px;
     }
 }
 

@@ -87,7 +87,6 @@ const loadSideBar = (searchEl) => {
     const logoOfPerson = `./assets/houses/${actualHouse}.png`;
     const pictureofPsn = actualPsn.picture ? actualPsn.picture : './assets/pictures/placeholder.png';
     modifySidebar(pictureofPsn, actualPsn.name, logoOfPerson, actualPsn.bio);
-    
   } catch (error) {
     madeSideBarContent();
     document.querySelector('.nameWithLogo h1').textContent = 'Character not found';
@@ -128,16 +127,6 @@ input.addEventListener('keyup', (e) => {
   e.preventDefault();
   e.key === 'Enter' ? loadSideBar(input.value) : '';
 });
-
-/* menu.addEventListener('click', () => {
-  menu.classList.toggle('activeMenu');
-  sidebar.classList.toggle('activeSidebar');
-  const timeout = setTimeout(() => {
-    sidebar.classList.toggle('activeSidebar2');
-  }, 500);
-  clearTimeout(timeout);
-  menu.classList.toggle('activeMenu2');
-}); */
 
 (function () {
   loadData();
